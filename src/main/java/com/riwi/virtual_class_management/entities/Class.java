@@ -35,8 +35,7 @@ public class Class {
     )
     private List<Student> students = new ArrayList<>();
 
-    @OneToMany(mappedBy = "class", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Lesson> lessons = new ArrayList<>();
-
+    @OneToMany(mappedBy = "aClass", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Lesson> lessons;
 
 }

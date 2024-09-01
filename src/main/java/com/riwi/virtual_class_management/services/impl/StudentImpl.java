@@ -42,7 +42,8 @@ public class StudentImpl implements IStudentService {
 
     @Override
     public Student readById(Long aLong) {
-        return null;
+        return studentRepository.findById(aLong).orElse(null);
+
     }
 
     @Override
@@ -51,14 +52,14 @@ public class StudentImpl implements IStudentService {
         student.setName(studentBasicInfo.getName());
         student.setEmail(studentBasicInfo.getEmail());
         student.setActive(true); // Establece el estado por defecto
-        // aca se asginan los ID de las clases
+        // aca se asignan los ID de las clases
 
         Student savedStudent = studentRepository.save(student);
         return StudentBasicInfo.builder()
                 .name(savedStudent.getName())
                 .email(savedStudent.getEmail())
                 .classes(savedStudent.getClasses().stream()
-                        .map(c -> c.getName()) // se cambia segun lo que se quiera mostar de`Class`
+                        .map(c -> c.getName()) // se cambia segun lo que se quiera mostrar de`Class`
                         .collect(Collectors.toList()))
                 .build();
     }

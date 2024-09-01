@@ -16,9 +16,12 @@ public class StudentImpl implements IStudentService {
     @Autowired
     StudentRepository studentRepository;
 
-    @Override
-    public void archive(Long aLong) {
 
+    @Override
+    public Student archive(Long id) {
+        Student student = readById(id);
+        student.setActive(false);
+        return studentRepository.save(student);
     }
 
     @Override
@@ -41,8 +44,10 @@ public class StudentImpl implements IStudentService {
     }
 
     @Override
-    public Student readById(Long aLong) {
-        return null;
+    public Student readById(Long id) {
+        return studentRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Student not found with id: " + id));
+
     }
 
     @Override
@@ -51,16 +56,17 @@ public class StudentImpl implements IStudentService {
         student.setName(studentBasicInfo.getName());
         student.setEmail(studentBasicInfo.getEmail());
         student.setActive(true); // Establece el estado por defecto
-        // aca se asginan los ID de las clases
+        // aca se asignan los ID de las clases
 
         Student savedStudent = studentRepository.save(student);
         return StudentBasicInfo.builder()
                 .name(savedStudent.getName())
                 .email(savedStudent.getEmail())
                 .classes(savedStudent.getClasses().stream()
-                        .map(c -> c.getName()) // se cambia segun lo que se quiera mostar de`Class`
+                        .map(c -> c.getName()) // se cambia segun lo que se quiera mostrar de`Class`
                         .collect(Collectors.toList()))
                 .build();
     }
+
 
 }

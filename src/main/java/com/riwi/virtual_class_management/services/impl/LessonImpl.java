@@ -15,8 +15,9 @@ public class LessonImpl implements ILessonService {
     private LessonRepository lessonRepository;
 
     @Override
-    public void archive(Long aLong) {
+    public Lesson archive(Long aLong) {
 
+        return null;
     }
 
     @Override

@@ -1,5 +1,7 @@
 package com.riwi.virtual_class_management.services.CRUD;
 
-public interface Archive<ID>{
-    public void archive(ID id);
+import javax.swing.text.html.parser.Entity;
+
+public interface Archive<Entity,ID>{
+    public Entity archive(ID id);
 }

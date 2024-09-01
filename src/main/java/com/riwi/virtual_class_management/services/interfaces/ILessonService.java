@@ -8,5 +8,5 @@ public interface ILessonService extends
         Create<Lesson, Lesson>,
         ReadById<Lesson, Long>,
         ReadAll<Lesson>,
-        Archive<Long> {
+        Archive<Lesson,Long> {
 }

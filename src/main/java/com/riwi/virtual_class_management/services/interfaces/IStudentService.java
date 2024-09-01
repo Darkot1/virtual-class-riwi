@@ -11,5 +11,5 @@ public interface IStudentService extends
         Create<Student, Student>,
         ReadById<Student, Long>,
         ReadAll<StudentBasicInfo>,
-        Archive<Long> {
+        Archive<Student,Long> {
 }

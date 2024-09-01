@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("api/v1")
@@ -33,4 +34,19 @@ public class StudentController {
         return ResponseEntity.ok(studentService.readById(id));
     }
 
+    @PatchMapping("students/{id}/disable")
+    public ResponseEntity<StudentBasicInfo> disableStudent(@PathVariable Long id) {
+        Student disabledStudent = studentService.archive(id);
+
+        // Convertir entidad Student
+        StudentBasicInfo studentDTO = StudentBasicInfo.builder()
+                .name(disabledStudent.getName())
+                .email(disabledStudent.getEmail())
+                .classes(disabledStudent.getClasses().stream()
+                        .map(c -> c.getName()) // Cambia según el campo que quieras mostrar de `Class`
+                        .collect(Collectors.toList()))
+                .build();
+
+        return ResponseEntity.ok(studentDTO);
+    }
 }

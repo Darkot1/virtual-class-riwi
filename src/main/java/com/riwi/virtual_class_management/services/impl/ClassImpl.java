@@ -14,8 +14,9 @@ public class ClassImpl implements IClassService {
     private ClassRepository classRepository;
 
     @Override
-    public void archive(Long aLong) {
+    public Class archive(Long aLong) {
 
+        return null;
     }
 
     @Override

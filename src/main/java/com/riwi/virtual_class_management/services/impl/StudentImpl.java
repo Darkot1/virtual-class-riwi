@@ -16,9 +16,12 @@ public class StudentImpl implements IStudentService {
     @Autowired
     StudentRepository studentRepository;
 
-    @Override
-    public void archive(Long aLong) {
 
+    @Override
+    public Student archive(Long id) {
+        Student student = readById(id);
+        student.setActive(false);
+        return studentRepository.save(student);
     }
 
     @Override
@@ -41,8 +44,9 @@ public class StudentImpl implements IStudentService {
     }
 
     @Override
-    public Student readById(Long aLong) {
-        return studentRepository.findById(aLong).orElse(null);
+    public Student readById(Long id) {
+        return studentRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Student not found with id: " + id));
 
     }
 
@@ -63,5 +67,6 @@ public class StudentImpl implements IStudentService {
                         .collect(Collectors.toList()))
                 .build();
     }
+
 
 }

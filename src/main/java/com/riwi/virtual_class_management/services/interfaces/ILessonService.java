@@ -9,4 +9,8 @@ public interface ILessonService extends
         ReadById<Lesson, Long>,
         ReadAll<Lesson>,
         Archive<Lesson,Long> {
+
+    void destroy(Long id);
+
+    Lesson disableLesson(Long id);
 }

@@ -8,4 +8,6 @@ public interface IClassService extends
         Create<Class, Class>,
         ReadAll<Class>,
         ReadById<Class, Long>{
+
+    void destroy(Long id);
 }
